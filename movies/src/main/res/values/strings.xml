@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="movie_duration">Duration: %dh %dm</string>
+    <string name="error_message_data">There was an error while retrieving data.</string>
+    <string name="retry">Retry</string>
 </resources>
