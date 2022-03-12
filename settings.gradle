@@ -14,3 +14,7 @@ dependencyResolutionManagement {
 }
 rootProject.name = "The One App"
 include ':app'
+include ':data'
+include ':domain'
+include ':movies'
+include ':core'
