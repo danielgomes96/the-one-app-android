@@ -2,10 +2,8 @@ package com.devlabs.data.dto
 
 import com.google.gson.annotations.SerializedName
 
-data class DTOCharacter(
+data class DTOQuote(
     @SerializedName("_id")
     val id: String?,
-    val name: String?,
-    val gender: String?,
-    val birth: String?
+    val dialog: String?
 )

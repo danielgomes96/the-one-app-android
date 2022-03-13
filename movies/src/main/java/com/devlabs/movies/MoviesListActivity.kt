@@ -2,12 +2,14 @@ package com.devlabs.movies
 
 import android.content.Intent
 import android.os.Bundle
+import android.system.Os.bind
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.devlabs.characters.CharactersListActivity
+import com.devlabs.core.extension.bind
 import com.devlabs.core.extension.gone
 import com.devlabs.core.extension.visible
 import com.devlabs.domain.entity.Movie
@@ -32,13 +34,8 @@ class MoviesListActivity : AppCompatActivity() {
         findViewById(R.id.activity_movies_root)
     }
 
-    private val progressLoading: ProgressBar by lazy {
-        findViewById(R.id.activity_movies_progress)
-    }
-
-    private val rvMovies: RecyclerView by lazy {
-        findViewById(R.id.activity_movies_recycler_view)
-    }
+    private val progressLoading: ProgressBar by bind(R.id.activity_movies_progress)
+    private val rvMovies: RecyclerView by bind(R.id.activity_movies_recycler_view)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

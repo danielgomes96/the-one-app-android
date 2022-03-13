@@ -24,6 +24,8 @@
         <activity android:name="com.devlabs.movies.MoviesListActivity"/>
 
         <activity android:name="com.devlabs.characters.CharactersListActivity"/>
+
+        <activity android:name="com.devlabs.characters.CharacterDetailsActivity"/>
     </application>
 
 </manifest>

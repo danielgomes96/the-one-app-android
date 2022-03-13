@@ -1,6 +1,6 @@
 package com.devlabs.data.di
 
-import com.devlabs.data.repository.CharactersListRepositoryImpl
+import com.devlabs.data.repository.CharactersRepositoryImpl
 import com.devlabs.data.repository.MoviesRepositoryImpl
 import com.devlabs.domain.repository.CharactersRepository
 import com.devlabs.domain.repository.MoviesRepository
@@ -14,7 +14,7 @@ val repositoryModule = module {
     }
 
     factory {
-        CharactersListRepositoryImpl(
+        CharactersRepositoryImpl(
             get()
         ) as CharactersRepository
     }

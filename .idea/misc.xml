@@ -3,8 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/danie/Desktop/TheOneApp/characters/src/main/res/layout/activity_character_details.xml" value="0.34322916666666664" />
         <entry key="..\:/Users/danie/Desktop/TheOneApp/characters/src/main/res/layout/activity_characters_list.xml" value="0.20729166666666668" />
+        <entry key="..\:/Users/danie/Desktop/TheOneApp/characters/src/main/res/layout/empty_characters_quote.xml" value="0.34322916666666664" />
         <entry key="..\:/Users/danie/Desktop/TheOneApp/characters/src/main/res/layout/item_character.xml" value="0.34322916666666664" />
+        <entry key="..\:/Users/danie/Desktop/TheOneApp/characters/src/main/res/layout/item_quote.xml" value="0.34322916666666664" />
         <entry key="..\:/Users/danie/Desktop/TheOneApp/movies/src/main/res/drawable/ic_score.xml" value="0.2825" />
         <entry key="..\:/Users/danie/Desktop/TheOneApp/movies/src/main/res/layout/activity_movies_list.xml" value="0.196875" />
         <entry key="..\:/Users/danie/Desktop/TheOneApp/movies/src/main/res/layout/item_movie.xml" value="0.67" />

@@ -6,5 +6,4 @@ sealed class ResultWrapper<out T> {
     object Empty : ResultWrapper<Nothing>()
     data class Success<out T>(val value: T) : ResultWrapper<T>()
     data class GenericError(val code: Int? = null, val errorMessage: String? = null) : ResultWrapper<Nothing>()
-    object NetworkError : ResultWrapper<Nothing>()
 }

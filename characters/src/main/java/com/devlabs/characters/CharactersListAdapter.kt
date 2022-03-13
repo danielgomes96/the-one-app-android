@@ -12,7 +12,7 @@ import com.devlabs.domain.entity.Character
 import com.devlabs.domain.entity.Movie
 
 class CharactersListAdapter(
-    private val onCharacterClicked: () -> (Unit)
+    private val onCharacterClicked: (Character) -> (Unit)
 ): ListAdapter<Character, CharactersListAdapter.Holder>(CharactersListAdapter) {
 
     private var characterList = mutableListOf<Character>()
@@ -46,11 +46,11 @@ class CharactersListAdapter(
     inner class Holder(view: View): RecyclerView.ViewHolder(view) {
         private val tvTitle: TextView = view.findViewById(R.id.item_character_name)
 
-        fun bind(character: Character, characterClicked: () -> (Unit)) {
+        fun bind(character: Character, characterClicked: (Character) -> (Unit)) {
             tvTitle.text = character.name
 
             itemView.setOnClickListener {
-                characterClicked()
+                characterClicked(character)
             }
         }
     }

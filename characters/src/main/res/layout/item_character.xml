@@ -8,9 +8,8 @@
         android:id="@+id/item_character_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="14dp"
-        android:textSize="16sp"
-        android:textColor="#0fa"
+        android:layout_margin="@dimen/margin_14dp"
+        android:textColor="@color/black"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
@@ -18,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#0fa"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/margin_8dp"
         app:layout_constraintTop_toBottomOf="@id/item_character_name"
         app:layout_constraintBottom_toBottomOf="parent"/>
 

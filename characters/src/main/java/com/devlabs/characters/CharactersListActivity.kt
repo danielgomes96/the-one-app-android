@@ -1,11 +1,13 @@
 package com.devlabs.characters
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.devlabs.core.Constants.KEY_CHARACTER_DETAILS
+import com.devlabs.core.extension.bind
 import com.devlabs.domain.entity.Character
 import com.devlabs.domain.entity.ResultWrapper
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -14,14 +16,12 @@ class CharactersListActivity : AppCompatActivity() {
 
     private val viewModel by viewModel<CharactersListViewModel>()
     private val charactersListAdapter: CharactersListAdapter by lazy {
-        CharactersListAdapter {
-            //openCharacterDetails()
+        CharactersListAdapter { character ->
+            openCharacterDetails(character)
         }
     }
 
-    private val rvCharactersList: RecyclerView by lazy {
-        findViewById(R.id.activity_characters_list_recycler)
-    }
+    private val rvCharactersList: RecyclerView by bind(R.id.activity_characters_list_recycler)
 
     private val paginationScrollListener: PaginationScrollListener by lazy {
         object : PaginationScrollListener(rvCharactersList.layoutManager as LinearLayoutManager) {
@@ -63,7 +63,7 @@ class CharactersListActivity : AppCompatActivity() {
                 charactersListAdapter.addItemsToList(result.value)
             }
             is ResultWrapper.GenericError -> {
-
+                viewModel.currentPage = viewModel.currentPage.dec()
             }
             ResultWrapper.Empty -> {
 
@@ -74,10 +74,13 @@ class CharactersListActivity : AppCompatActivity() {
             ResultWrapper.Loading -> {
 
             }
-            ResultWrapper.NetworkError -> {
-
-            }
         }
+    }
+
+    private fun openCharacterDetails(character: Character) {
+        val intent = Intent(this, CharacterDetailsActivity::class.java)
+        intent.putExtra(KEY_CHARACTER_DETAILS, character)
+        startActivity(intent)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

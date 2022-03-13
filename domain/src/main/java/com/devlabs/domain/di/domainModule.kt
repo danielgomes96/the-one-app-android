@@ -1,9 +1,6 @@
 package com.devlabs.domain.di
 
-import com.devlabs.domain.usecase.GetCharactersUseCase
-import com.devlabs.domain.usecase.GetCharactersUseCaseImpl
-import com.devlabs.domain.usecase.GetMoviesListUseCase
-import com.devlabs.domain.usecase.GetMoviesListUseCaseImpl
+import com.devlabs.domain.usecase.*
 import org.koin.dsl.module
 
 val domainModule = module {
@@ -16,5 +13,10 @@ val domainModule = module {
         GetCharactersUseCaseImpl(
             get()
         ) as GetCharactersUseCase
+    }
+    factory {
+        GetCharacterQuotesUseCaseImpl(
+            get()
+        ) as GetCharacterQuotesUseCase
     }
 }
