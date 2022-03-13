@@ -3,6 +3,7 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.7">
       <module name="The_One_App.app" target="11" />
+      <module name="The_One_App.characters" target="11" />
       <module name="The_One_App.core" target="11" />
       <module name="The_One_App.data" target="11" />
       <module name="The_One_App.movies" target="11" />

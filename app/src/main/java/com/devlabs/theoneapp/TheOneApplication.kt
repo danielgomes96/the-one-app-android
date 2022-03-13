@@ -1,6 +1,7 @@
 package com.devlabs.theoneapp
 
 import android.app.Application
+import com.devlabs.characters.di.charactersListModule
 import com.devlabs.data.di.repositoryModule
 import com.devlabs.data.di.serviceModule
 import com.devlabs.domain.di.domainModule
@@ -15,7 +16,7 @@ class TheOneApplication : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@TheOneApplication)
-            modules(listOf(domainModule, moviesModule, serviceModule, repositoryModule))
+            modules(listOf(domainModule, moviesModule, charactersListModule, serviceModule, repositoryModule))
         }
     }
 }
