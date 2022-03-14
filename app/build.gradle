@@ -37,6 +37,7 @@ dependencies {
     implementation project(':characters')
     implementation project(':data')
     implementation project(':domain')
+    implementation "androidx.biometric:biometric-ktx:1.2.0-alpha04"
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'

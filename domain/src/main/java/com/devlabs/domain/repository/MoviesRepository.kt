@@ -5,5 +5,6 @@ import com.devlabs.domain.entity.ResultWrapper
 import kotlinx.coroutines.flow.Flow
 
 interface MoviesRepository {
-    suspend fun getMovies(): Flow<ResultWrapper<List<Movie>>>
+    suspend fun fetchMoviesFromApi(): Flow<ResultWrapper<List<Movie>>>
+    suspend fun favoriteMovie(movieId: String): Flow<ResultWrapper<Unit>>
 }

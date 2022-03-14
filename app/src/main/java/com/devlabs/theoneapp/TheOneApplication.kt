@@ -2,10 +2,13 @@ package com.devlabs.theoneapp
 
 import android.app.Application
 import com.devlabs.characters.di.charactersModule
+import com.devlabs.data.di.databaseModule
 import com.devlabs.data.di.repositoryModule
 import com.devlabs.data.di.serviceModule
+import com.devlabs.data.di.sharedPrefsModule
 import com.devlabs.domain.di.domainModule
 import com.devlabs.movies.di.moviesModule
+import com.devlabs.theoneapp.di.authModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin
@@ -16,7 +19,15 @@ class TheOneApplication : Application() {
         super.onCreate()
         startKoin {
             androidContext(this@TheOneApplication)
-            modules(listOf(domainModule, moviesModule, charactersModule, serviceModule, repositoryModule))
+            modules(listOf(domainModule,
+                authModule,
+                moviesModule,
+                charactersModule,
+                serviceModule,
+                repositoryModule,
+                databaseModule,
+                sharedPrefsModule)
+            )
         }
     }
 }

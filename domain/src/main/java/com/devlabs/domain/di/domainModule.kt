@@ -19,4 +19,24 @@ val domainModule = module {
             get()
         ) as GetCharacterQuotesUseCase
     }
+    factory {
+        FavoriteMovieUseCaseImpl(
+            get()
+        ) as FavoriteMovieUseCase
+    }
+    factory {
+        SavePinUseCaseImpl(
+            get()
+        ) as SavePinUseCase
+    }
+    factory {
+        HasPinUseCaseImpl(
+            get()
+        ) as HasPinUseCase
+    }
+    factory {
+        AuthPinUseCaseImpl(
+            get()
+        ) as AuthPinUseCase
+    }
 }

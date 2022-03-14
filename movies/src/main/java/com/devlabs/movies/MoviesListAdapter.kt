@@ -4,7 +4,9 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -14,10 +16,11 @@ import com.devlabs.domain.entity.Movie
 
 class MoviesListAdapter(
     private val context: Context,
-    private val onMovieClicked: () -> (Unit)
+    private val onMovieClicked: () -> (Unit),
+    private val onFavoriteClicked: (String) -> (Unit)
 ):  ListAdapter<Movie, MoviesListAdapter.Holder>(MoviesListAdapter) {
-    private var moviesList = emptyList<Movie>()
 
+    private var moviesList = emptyList<Movie>()
     fun setList(list: List<Movie>) {
         moviesList = list
     }
@@ -46,6 +49,7 @@ class MoviesListAdapter(
         private val tvTitle: TextView = view.findViewById(R.id.text_movie_title)
         private val tvScore: TextView = view.findViewById(R.id.text_movie_score)
         private val tvDuration: TextView = view.findViewById(R.id.text_movie_duration)
+        private val imFavorite: ImageView = view.findViewById(R.id.image_favorite_movie)
 
         fun bind(context: Context, movie: Movie, movieClicked: () -> (Unit)) {
             tvTitle.text = movie.name
@@ -55,8 +59,16 @@ class MoviesListAdapter(
             tvDuration.text = String.format(context.getString(R.string.movie_duration), durationInHours, durationInMinutes)
             tvScore.text = String.format("%.1f", movie.score / 10)
 
+            if (movie.isFavorite) {
+                imFavorite.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_favorite_filled))
+            }
+
             itemView.setOnClickListener {
                 movieClicked()
+            }
+
+            imFavorite.setOnClickListener {
+                onFavoriteClicked(movie.id)
             }
         }
     }

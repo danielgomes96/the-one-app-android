@@ -3,6 +3,8 @@ package com.devlabs.movies
 import android.content.Intent
 import android.os.Bundle
 import android.system.Os.bind
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -20,32 +22,44 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MoviesListActivity : AppCompatActivity() {
     private val viewModel by viewModel<MoviesListViewModel>()
     private val moviesAdapter: MoviesListAdapter by lazy {
-        MoviesListAdapter(this) {
+        MoviesListAdapter(this, {
             openCharactersList()
-        }
+        }, ::favoriteMovie)
     }
 
-    private fun openCharactersList() {
-        val intent = Intent(this, CharactersListActivity::class.java)
-        startActivity(intent)
-    }
-
-    private val containerRoot: ConstraintLayout by lazy {
-        findViewById(R.id.activity_movies_root)
-    }
-
+    private val containerRoot: ConstraintLayout by bind((R.id.activity_movies_root))
     private val progressLoading: ProgressBar by bind(R.id.activity_movies_progress)
     private val rvMovies: RecyclerView by bind(R.id.activity_movies_recycler_view)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movies_list)
+        setSupportActionBar(findViewById(R.id.toolbar))
         viewModel.getMoviesList()
         initObservers()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.movies_favorites_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
     private fun initObservers() {
         viewModel.moviesListLiveData.observe(this, ::handleResult)
+        viewModel.favoriteLiveData.observe(this, ::handleFavoriteResult)
+    }
+
+    private fun handleFavoriteResult(resultWrapper: ResultWrapper<Unit>?) {
+        moviesAdapter.notifyDataSetChanged()
+    }
+
+    private fun favoriteMovie(movieId: String) {
+        viewModel.favoriteMovie(movieId)
+    }
+
+    private fun openCharactersList() {
+        val intent = Intent(this, CharactersListActivity::class.java)
+        startActivity(intent)
     }
 
     private fun handleResult(resultState: ResultWrapper<List<Movie>>?) {
@@ -78,5 +92,15 @@ class MoviesListActivity : AppCompatActivity() {
         rvMovies.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         moviesAdapter.setList(list)
         rvMovies.adapter = moviesAdapter
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.action_favorite -> {
+            true
+        }
+
+        else -> {
+            super.onOptionsItemSelected(item)
+        }
     }
 }

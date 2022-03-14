@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/danie/Desktop/TheOneApp/app/src/main/res/layout/activity_main.xml" value="0.23505434782608695" />
+        <entry key="..\:/Users/danie/Desktop/TheOneApp/app/src/main/res/layout/bottom_sheet_pin_auth.xml" value="0.33" />
         <entry key="..\:/Users/danie/Desktop/TheOneApp/characters/src/main/res/layout/activity_character_details.xml" value="0.34322916666666664" />
         <entry key="..\:/Users/danie/Desktop/TheOneApp/characters/src/main/res/layout/activity_characters_list.xml" value="0.20729166666666668" />
         <entry key="..\:/Users/danie/Desktop/TheOneApp/characters/src/main/res/layout/empty_characters_quote.xml" value="0.34322916666666664" />
@@ -10,7 +12,8 @@
         <entry key="..\:/Users/danie/Desktop/TheOneApp/characters/src/main/res/layout/item_quote.xml" value="0.34322916666666664" />
         <entry key="..\:/Users/danie/Desktop/TheOneApp/movies/src/main/res/drawable/ic_score.xml" value="0.2825" />
         <entry key="..\:/Users/danie/Desktop/TheOneApp/movies/src/main/res/layout/activity_movies_list.xml" value="0.196875" />
-        <entry key="..\:/Users/danie/Desktop/TheOneApp/movies/src/main/res/layout/item_movie.xml" value="0.67" />
+        <entry key="..\:/Users/danie/Desktop/TheOneApp/movies/src/main/res/layout/item_movie.xml" value="0.33" />
+        <entry key="..\:/Users/danie/Desktop/TheOneApp/movies/src/main/res/menu/movies_favorites_menu.xml" value="0.215625" />
       </map>
     </option>
   </component>

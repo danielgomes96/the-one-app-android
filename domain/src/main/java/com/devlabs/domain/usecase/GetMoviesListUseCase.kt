@@ -9,7 +9,7 @@ class GetMoviesListUseCaseImpl(
     private val moviesRepository: MoviesRepository
 ) : GetMoviesListUseCase {
     override suspend fun execute(): Flow<ResultWrapper<List<Movie>>> =
-        moviesRepository.getMovies()
+        moviesRepository.fetchMoviesFromApi()
 }
 
 interface GetMoviesListUseCase {
