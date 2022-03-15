@@ -26,9 +26,17 @@
             android:name="com.devlabs.movies.MoviesListActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"/>
 
-        <activity android:name="com.devlabs.characters.CharactersListActivity"/>
+        <activity
+            android:name="com.devlabs.characters.CharactersListActivity"
+            android:theme="@style/Theme.AppCompat"/>
 
-        <activity android:name="com.devlabs.characters.CharacterDetailsActivity"/>
+        <activity
+            android:name="com.devlabs.characters.CharacterDetailsActivity"
+            android:theme="@style/Theme.AppCompat"/>
+
+        <activity
+            android:name="com.devlabs.movies.FavoriteMoviesActivity"
+            android:theme="@style/Theme.AppCompat"/>
     </application>
 
 </manifest>

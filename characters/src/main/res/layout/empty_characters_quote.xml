@@ -9,6 +9,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="There is no quotes for this character."/>
+        android:text="@string/empty_quotes"/>
 
 </LinearLayout>

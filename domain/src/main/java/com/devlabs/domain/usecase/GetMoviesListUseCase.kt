@@ -8,10 +8,12 @@ import kotlinx.coroutines.flow.Flow
 class GetMoviesListUseCaseImpl(
     private val moviesRepository: MoviesRepository
 ) : GetMoviesListUseCase {
-    override suspend fun execute(): Flow<ResultWrapper<List<Movie>>> =
-        moviesRepository.fetchMoviesFromApi()
+    override suspend fun execute(): Flow<List<Movie>> {
+        moviesRepository.requestMoviesFromApi()
+        return moviesRepository.getMoviesFromDatabase()
+    }
 }
 
 interface GetMoviesListUseCase {
-    suspend fun execute(): Flow<ResultWrapper<List<Movie>>>
+    suspend fun execute(): Flow<List<Movie>>
 }

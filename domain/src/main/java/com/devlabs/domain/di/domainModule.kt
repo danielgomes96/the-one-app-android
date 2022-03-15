@@ -39,4 +39,9 @@ val domainModule = module {
             get()
         ) as AuthPinUseCase
     }
+    factory {
+        GetFavoriteMoviesUseCaseImpl(
+            get()
+        ) as GetFavoriteMoviesUseCase
+    }
 }

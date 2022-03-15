@@ -20,6 +20,7 @@ import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MoviesListActivity : AppCompatActivity() {
+
     private val viewModel by viewModel<MoviesListViewModel>()
     private val moviesAdapter: MoviesListAdapter by lazy {
         MoviesListAdapter(this, {
@@ -46,15 +47,10 @@ class MoviesListActivity : AppCompatActivity() {
 
     private fun initObservers() {
         viewModel.moviesListLiveData.observe(this, ::handleResult)
-        viewModel.favoriteLiveData.observe(this, ::handleFavoriteResult)
     }
 
-    private fun handleFavoriteResult(resultWrapper: ResultWrapper<Unit>?) {
-        moviesAdapter.notifyDataSetChanged()
-    }
-
-    private fun favoriteMovie(movieId: String) {
-        viewModel.favoriteMovie(movieId)
+    private fun favoriteMovie(movie: Movie) {
+        viewModel.favoriteMovie(movie)
     }
 
     private fun openCharactersList() {
@@ -62,23 +58,26 @@ class MoviesListActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun handleResult(resultState: ResultWrapper<List<Movie>>?) {
-        when (resultState) {
-            ResultWrapper.Empty -> {
-                displayRetrySnackBar()
-            }
-            ResultWrapper.Loading -> {
-                progressLoading.visible()
-            }
-            is ResultWrapper.Success -> {
-                progressLoading.gone()
-                rvMovies.visible()
-                setupMoviesList(resultState.value)
-            }
-            is ResultWrapper.GenericError -> {
-                displayRetrySnackBar()
-            }
-        }
+    private fun handleResult(resultState: List<Movie>) {
+        progressLoading.gone()
+        rvMovies.visible()
+        setupMoviesList(resultState)
+//        when (resultState) {
+//            ResultWrapper.Empty -> {
+//                displayRetrySnackBar()
+//            }
+//            ResultWrapper.Loading -> {
+//                progressLoading.visible()
+//            }
+//            is ResultWrapper.Success -> {
+//                progressLoading.gone()
+//                rvMovies.visible()
+//                setupMoviesList(resultState.value)
+//            }
+//            is ResultWrapper.GenericError -> {
+//                displayRetrySnackBar()
+//            }
+//        }
     }
 
     private fun displayRetrySnackBar() {
@@ -96,6 +95,8 @@ class MoviesListActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.action_favorite -> {
+            val intent = Intent(this, FavoriteMoviesActivity::class.java)
+            startActivity(intent)
             true
         }
 

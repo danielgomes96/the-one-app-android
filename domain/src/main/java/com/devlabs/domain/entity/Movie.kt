@@ -5,5 +5,5 @@ data class Movie(
     val name: String,
     val duration: Int,
     val score: Float,
-    val isFavorite: Boolean
+    var isFavorite: Boolean
 )

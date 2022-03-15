@@ -2,4 +2,5 @@
 <resources>
     <string name="title_characters_list">Characters List</string>
     <string name="empty_birth">No age</string>
+    <string name="empty_quotes">There is no quotes for this character.</string>
 </resources>

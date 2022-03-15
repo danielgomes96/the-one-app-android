@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/activity_favorite_movies_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+    <ProgressBar
+        android:id="@+id/activity_favorite_movies_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/activity_favorite_movies_txt_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="@string/empty_favorites_movies"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+</LinearLayout>

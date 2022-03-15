@@ -31,6 +31,7 @@ class AuthenticationViewModel(
             _loggedInLiveData.postValue(authPinUseCase.execute(pin))
         } else {
             savePinUseCase.execute(pin)
+            _loggedInLiveData.postValue(true)
         }
     }
 }

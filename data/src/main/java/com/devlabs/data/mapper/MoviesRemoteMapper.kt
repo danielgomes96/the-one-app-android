@@ -7,7 +7,7 @@ class MoviesRemoteMapper : BaseMapper<List<com.devlabs.data.local.Movie>?, List<
         val moviesList = arrayListOf<Movie>()
         entity?.map {
             moviesList.add(
-                Movie(it.id, it.name, it.duration, it.score, false)
+                Movie(it.id, it.name, it.duration, it.score, it.isFavorite)
             )
         }
         return moviesList

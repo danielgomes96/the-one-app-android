@@ -16,6 +16,9 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    configurations {
+        ktlint
+    }
     buildTypes {
         release {
             minifyEnabled false

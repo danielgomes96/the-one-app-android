@@ -3,4 +3,6 @@
     <string name="movie_duration">Duration: %dh %dm</string>
     <string name="error_message_data">There was an error while retrieving data.</string>
     <string name="retry">Retry</string>
+    <string name="favorites_title">My Favorites</string>
+    <string name="empty_favorites_movies">You do not have any favorite movies yet.</string>
 </resources>

@@ -4,11 +4,9 @@ import com.devlabs.data.service.TheOneAPI
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.android.BuildConfig
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
 
 const val BASE_API_URL = "https://the-one-api.dev/v2/"
 
