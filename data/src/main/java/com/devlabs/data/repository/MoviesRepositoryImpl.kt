@@ -18,19 +18,22 @@ class MoviesRepositoryImpl(
     private val moviesDao: MoviesDao
 ) : MoviesRepository {
 
-    override suspend fun requestMoviesFromApi() {
+    override suspend fun fetchMoviesFromApi(): Flow<ResultWrapper<Unit>> = flow {
+        emit(ResultWrapper.Loading)
         if (moviesDao.getMovies().isEmpty()) {
-            withContext(Dispatchers.IO) {
-                runCatching {
-                    theOneAPI.getMovies()
-                }.onSuccess { response ->
-                    moviesDao.addMovies(
-                        MoviesLocalMapper().transform(response.body())
-                    )
-                }.onFailure {
-
-                }
+            runCatching {
+                theOneAPI.getMovies()
+            }.onSuccess { response ->
+                moviesDao.addMovies(
+                    MoviesLocalMapper().transform(response.body())
+                )
+                emit(ResultWrapper.Success(Unit))
+            }.onFailure {
+                emit(ResultWrapper.GenericError(null, it.localizedMessage))
             }
+
+        } else {
+            emit(ResultWrapper.Success(Unit))
         }
     }
 
@@ -47,14 +50,9 @@ class MoviesRepositoryImpl(
         }
     }
 
-    override suspend fun favoriteMovie(movie: Movie): Flow<ResultWrapper<Unit>> = flow {
-        emit(ResultWrapper.Loading)
+    override suspend fun favoriteMovie(movie: Movie) {
         runCatching {
             moviesDao.updateMovie(MovieLocalMapper().transform(movie))
-        }.onSuccess {
-            emit(ResultWrapper.Success(Unit))
-        }.onFailure {
-            emit(ResultWrapper.GenericError(null, it.localizedMessage))
         }
     }
 }

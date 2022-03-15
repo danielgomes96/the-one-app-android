@@ -5,9 +5,14 @@ import org.koin.dsl.module
 
 val domainModule = module {
     factory {
-        GetMoviesListUseCaseImpl(
+        FetchMoviesUseCaseImpl(
             get()
-        ) as GetMoviesListUseCase
+        ) as FetchMoviesUseCase
+    }
+    factory {
+        GetMoviesUseCaseImpl(
+            get()
+        ) as GetMoviesUseCase
     }
     factory {
         GetCharactersUseCaseImpl(

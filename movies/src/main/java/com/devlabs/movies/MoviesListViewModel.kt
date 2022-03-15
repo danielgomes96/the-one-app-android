@@ -6,42 +6,46 @@ import androidx.lifecycle.ViewModel
 import com.devlabs.domain.entity.Movie
 import com.devlabs.domain.entity.ResultWrapper
 import com.devlabs.domain.usecase.FavoriteMovieUseCase
+import com.devlabs.domain.usecase.FetchMoviesUseCase
 import com.devlabs.domain.usecase.GetFavoriteMoviesUseCase
-import com.devlabs.domain.usecase.GetMoviesListUseCase
+import com.devlabs.domain.usecase.GetMoviesUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class MoviesListViewModel(
-    private val getMoviesListUseCase: GetMoviesListUseCase,
+    private val fetchMoviesUseCase: FetchMoviesUseCase,
+    private val getMoviesUseCase: GetMoviesUseCase,
     private val favoriteMovieUseCase: FavoriteMovieUseCase,
     private val getFavoriteMoviesUseCase: GetFavoriteMoviesUseCase
 ) : ViewModel() {
+
+    private val _apiStatusLiveData = MutableLiveData<ResultWrapper<Unit>>()
+    val apiStatusLiveData: LiveData<ResultWrapper<Unit>>
+        get() = _apiStatusLiveData
 
     private val _moviesListLiveData = MutableLiveData<List<Movie>>()
     val moviesListLiveData: LiveData<List<Movie>>
         get() = _moviesListLiveData
 
-    private val _favoriteLiveData = MutableLiveData<ResultWrapper<Unit>>(ResultWrapper.InitialState())
-    val favoriteLiveData: LiveData<ResultWrapper<Unit>>
-        get() = _favoriteLiveData
-
     private val _favoriteMoviesLiveData = MutableLiveData<ResultWrapper<List<Movie>>>()
     val favoriteMoviesLiveData: LiveData<ResultWrapper<List<Movie>>>
         get() = _favoriteMoviesLiveData
 
+    fun fetchMoviesFromApi() = CoroutineScope(Dispatchers.IO).launch {
+        fetchMoviesUseCase.execute().collect {
+            _apiStatusLiveData.postValue(it)
+        }
+    }
 
     fun getMoviesList() = CoroutineScope(Dispatchers.IO).launch {
-        getMoviesListUseCase.execute().collect {
+        getMoviesUseCase.execute().collect {
             _moviesListLiveData.postValue(it)
         }
     }
 
     fun favoriteMovie(movie: Movie) = CoroutineScope(Dispatchers.IO).launch {
-        favoriteMovieUseCase.execute(movie).collect {
-            _favoriteLiveData.postValue(it)
-        }
+        favoriteMovieUseCase.execute(movie)
     }
 
     fun getFavoriteMovies() = CoroutineScope(Dispatchers.IO).launch {

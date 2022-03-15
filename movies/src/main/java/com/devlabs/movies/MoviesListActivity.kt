@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.system.Os.bind
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.LinearLayout
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -28,7 +29,7 @@ class MoviesListActivity : AppCompatActivity() {
         }, ::favoriteMovie)
     }
 
-    private val containerRoot: ConstraintLayout by bind((R.id.activity_movies_root))
+    private val containerRoot: LinearLayout by bind(R.id.activity_movies_root)
     private val progressLoading: ProgressBar by bind(R.id.activity_movies_progress)
     private val rvMovies: RecyclerView by bind(R.id.activity_movies_recycler_view)
 
@@ -36,7 +37,7 @@ class MoviesListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movies_list)
         setSupportActionBar(findViewById(R.id.toolbar))
-        viewModel.getMoviesList()
+        viewModel.fetchMoviesFromApi()
         initObservers()
     }
 
@@ -46,7 +47,12 @@ class MoviesListActivity : AppCompatActivity() {
     }
 
     private fun initObservers() {
-        viewModel.moviesListLiveData.observe(this, ::handleResult)
+        viewModel.apiStatusLiveData.observe(this, ::handleResult)
+        viewModel.moviesListLiveData.observe(this, ::setupMoviesFromDatabase)
+    }
+
+    private fun setupMoviesFromDatabase(list: List<Movie>) {
+        setupMoviesList(list)
     }
 
     private fun favoriteMovie(movie: Movie) {
@@ -58,32 +64,29 @@ class MoviesListActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun handleResult(resultState: List<Movie>) {
-        progressLoading.gone()
-        rvMovies.visible()
-        setupMoviesList(resultState)
-//        when (resultState) {
-//            ResultWrapper.Empty -> {
-//                displayRetrySnackBar()
-//            }
-//            ResultWrapper.Loading -> {
-//                progressLoading.visible()
-//            }
-//            is ResultWrapper.Success -> {
-//                progressLoading.gone()
-//                rvMovies.visible()
-//                setupMoviesList(resultState.value)
-//            }
-//            is ResultWrapper.GenericError -> {
-//                displayRetrySnackBar()
-//            }
-//        }
+    private fun handleResult(resultState: ResultWrapper<Unit>) {
+        when (resultState) {
+            ResultWrapper.Empty -> {
+                displayRetrySnackBar()
+            }
+            ResultWrapper.Loading -> {
+                progressLoading.visible()
+            }
+            is ResultWrapper.Success -> {
+                progressLoading.gone()
+                rvMovies.visible()
+                viewModel.getMoviesList()
+            }
+            is ResultWrapper.GenericError -> {
+                displayRetrySnackBar()
+            }
+        }
     }
 
     private fun displayRetrySnackBar() {
         progressLoading.gone()
         Snackbar.make(containerRoot, getString(R.string.error_message_data), Snackbar.LENGTH_INDEFINITE).setAction(getString(R.string.retry)) {
-            viewModel.getMoviesList()
+            viewModel.fetchMoviesFromApi()
         }.show()
     }
 

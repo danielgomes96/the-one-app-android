@@ -6,12 +6,13 @@ import com.devlabs.domain.repository.MoviesRepository
 import kotlinx.coroutines.flow.Flow
 
 interface FavoriteMovieUseCase {
-    suspend fun execute(movie: Movie): Flow<ResultWrapper<Unit>>
+    suspend fun execute(movie: Movie)
 }
 
 class FavoriteMovieUseCaseImpl(
     private val moviesRepository: MoviesRepository
 ) : FavoriteMovieUseCase {
-    override suspend fun execute(movie: Movie) : Flow<ResultWrapper<Unit>> =
+    override suspend fun execute(movie: Movie) {
         moviesRepository.favoriteMovie(movie)
+    }
 }
