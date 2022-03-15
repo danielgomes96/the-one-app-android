@@ -9,7 +9,8 @@ android {
     Properties properties = new Properties()
     properties.load(project.rootProject.file("gradle.properties").newDataInputStream())
 
-    def token_api = properties.getProperty("token_api")
+    //def token_api = properties.getProperty("token_api")
+    def token_api = "\"Fo-aCrpsC3MmzzsCTApZ\""
 
     defaultConfig {
         minSdk 21
